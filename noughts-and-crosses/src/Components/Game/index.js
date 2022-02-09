@@ -66,11 +66,6 @@ function Game() {
         setIsTurnOfX(!isTurnOfX);
     }
 
-    // function handlePlayerMove(move, index) {
-    //   console.log(`Game->handlePlayerMove: start ${index}`);
-    //   moveSymbol = move;
-    // }
-
     return (
         <>
             <GameInfo
