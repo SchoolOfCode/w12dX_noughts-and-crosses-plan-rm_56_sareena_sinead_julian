@@ -6,7 +6,9 @@
 import "./square.css";
 
 function Square({moveSymbol, handlePlayerMove}) {
-    const style = moveSymbol ? `squares ${moveSymbol}` : `squares`;
+    const style = moveSymbol
+        ? `squares-button ${moveSymbol}-button`
+        : `squares-button`;
 
     function handleClick() {
         handlePlayerMove();

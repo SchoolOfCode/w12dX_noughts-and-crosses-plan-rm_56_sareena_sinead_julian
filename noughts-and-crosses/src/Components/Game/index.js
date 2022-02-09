@@ -20,20 +20,19 @@ import {useState} from "react";
 import {calculateWinner} from "../../helper.js";
 import Board from "../Board";
 import GameInfo from "../GameInfo";
-
-export const PLAYER_X_MOVE = "X";
-export const PLAYER_O_MOVE = "O";
+import {PLAYER_X_MOVE, PLAYER_O_MOVE} from "../../config.js";
 
 function Game() {
-    const [boardArray, setBoardArray] = useState(Array(9).fill(null));
+    const initialBoardArray = Array(9).fill(null);
+    const [boardArray, setBoardArray] = useState(initialBoardArray);
 
     const [isTurnOfX, setIsTurnOfX] = useState(true);
     const currentPlayer = isTurnOfX ? PLAYER_X_MOVE : PLAYER_O_MOVE;
 
-    const winner = calculateWinner(boardArray);
+    const winner = calculateWinner(boardArray); //null, X or O or DRAW
 
     function handlePlayerMove(index) {
-        //if there's a winner, or if the square is already filled, then don't do anything, and just return
+        //if there's a winner (or a draw), or if the square is already filled, then don't do anything; just return
         if (winner || boardArray[index]) return;
 
         // otherwise, (1) update the current board with the player's move
@@ -47,17 +46,24 @@ function Game() {
         setIsTurnOfX(!isTurnOfX);
     }
 
+    function handlePlayAgainClick() {
+        setBoardArray(initialBoardArray);
+    }
     return (
         <>
-            <GameInfo
-                gameTitle="Room 56"
-                winner={winner}
-                whosTurn={currentPlayer}
-            />
-            <Board
-                boardArray={boardArray}
-                handlePlayerMove={handlePlayerMove}
-            />
+            <div className="game">
+                <GameInfo
+                    gameTitleText="Room 56"
+                    winnerOrDraw={winner}
+                    whosTurn={currentPlayer}
+                    buttonText="Play Again"
+                    handleButtonClick={handlePlayAgainClick}
+                />
+                <Board
+                    boardArray={boardArray}
+                    handlePlayerMove={handlePlayerMove}
+                />
+            </div>
         </>
     );
 }

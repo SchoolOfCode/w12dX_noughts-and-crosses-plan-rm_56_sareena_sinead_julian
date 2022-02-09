@@ -7,7 +7,7 @@
     justify-content: center;
 } */
 
-.squares {
+.squares-button {
     background: #272727;
     border: none;
     font-size: 5rem;
@@ -16,9 +16,9 @@
     outline: none;
 }
 
-.X {
+.X-button {
     color: red;
 }
-.O {
+.O-button {
     color: green;
 }
