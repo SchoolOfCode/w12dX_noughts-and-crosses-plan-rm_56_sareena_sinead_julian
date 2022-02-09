@@ -1,5 +1,6 @@
-import './game.css';
-import Board from '../Board';
+import "./game.css";
+import Board from "../Board";
+import GameInfo from "../GameInfo";
 
 // Game
 //   - State
@@ -19,11 +20,21 @@ import Board from '../Board';
 //     - Winner
 
 function Game() {
-  return (
-    <div className="Game">
-      <Board />
-    </div>
-  );
+    let moveSymbol = "X";
+
+    function handlePlayerMove() {
+        console.log(`Game->handlePlayerMove: start`);
+    }
+
+    return (
+        <div className="Game">
+            <Board
+                handlePlayerMove={handlePlayerMove}
+                moveSymbol={moveSymbol}
+            />
+            <GameInfo />
+        </div>
+    );
 }
 
 export default Game;
