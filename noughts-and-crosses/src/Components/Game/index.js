@@ -20,15 +20,34 @@ import GameInfo from "../GameInfo";
 //     - Winner
 
 function Game() {
-    let moveSymbol = "X";
+    let moveSymbol = "";
 
-    function handlePlayerMove() {
-        console.log(`Game->handlePlayerMove: start`);
+    // Winner = [0,0] [1,0] [2,0] 
+    //          [0,1] [1,1] [2,1]
+    //          [0,2] [1,2] [2,2]
+
+
+    //          [0,0] [0,1] [0,2] 
+    //          [1,0] [1,1] [1,2] 
+    //          [2,0] [2,1] [2,2] 
+
+    //          [0,0] [1,1] [2,2] 
+    //          [0,2] [1,1] [2,0] 
+
+
+    let boardArray = [['', '', ''],
+                      ['', '' ,''],
+                      ['', '', '']]
+
+    function handlePlayerMove(move, index) {
+        console.log(`Game->handlePlayerMove: start ${index}`);
+        moveSymbol = move;
     }
 
     return (
         <div className="Game">
             <Board
+                board={boardArray}
                 handlePlayerMove={handlePlayerMove}
                 moveSymbol={moveSymbol}
             />
