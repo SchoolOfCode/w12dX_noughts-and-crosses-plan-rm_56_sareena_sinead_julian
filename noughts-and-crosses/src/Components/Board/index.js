@@ -1,6 +1,6 @@
-import { Col, Row } from 'react-bootstrap';
-import './board.css';
-import Square from '../Square';
+// import {Col, Row} from "react-bootstrap";
+import "./board.css";
+import Square from "../Square";
 
 // - Board
 //   - Props
@@ -9,21 +9,20 @@ import Square from '../Square';
 //   - Render
 //     - Squares - 1 for each item in board, arranged into a grid
 
-// TODO: Refactor: Hardcoded rows and col and render with map
-function Board({ handlePlayerMove, board }) {
-  return (
-    <>
-      {board.map((moveSymbol, index) => {
-        return (
-          <Square
-            key={index}
-            handlePlayerMove={() => handlePlayerMove(index)}
-            moveSymbol={moveSymbol}
-          />
-        );
-      })}
-    </>
-  );
+function Board({boardArray, handlePlayerMove}) {
+    return (
+        <div className="board">
+            {boardArray.map((moveSymbol, index) => {
+                return (
+                    <Square
+                        key={index}
+                        moveSymbol={moveSymbol}
+                        handlePlayerMove={() => handlePlayerMove(index)}
+                    />
+                );
+            })}
+        </div>
+    );
 }
 
 // function Board({handlePlayerMove, moveSymbol, board}) {

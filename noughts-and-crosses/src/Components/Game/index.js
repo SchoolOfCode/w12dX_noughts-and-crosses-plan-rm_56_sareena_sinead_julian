@@ -1,7 +1,3 @@
-import './game.css';
-import Board from '../Board';
-import GameInfo from '../GameInfo';
-
 // Game
 //   - State
 //     - `board = [null,null,null,null,null,null,null,null,null] <- "X", "O", or null`
@@ -19,46 +15,75 @@ import GameInfo from '../GameInfo';
 //     - Who's turn is it?
 //     - Winner
 
+// Winner = [0,0] [1,0] [2,0]
+//          [0,1] [1,1] [2,1]
+//          [0,2] [1,2] [2,2]
+
+//          [0,0] [0,1] [0,2]
+//          [1,0] [1,1] [1,2]
+//          [2,0] [2,1] [2,2]
+
+//          [0,0] [1,1] [2,2]
+//          [0,2] [1,1] [2,0]
+
+import "./game.css";
+import {useState} from "react";
+import {calculateWinner} from "../../helper.js";
+import Board from "../Board";
+import GameInfo from "../GameInfo";
+
+export const PLAYER_X_MOVE = "X";
+export const PLAYER_O_MOVE = "O";
+
 function Game() {
-  let moveSymbol = '';
+    // let moveSymbol = "";
+    // let boardArray = [['', '', ''],
+    //                   ['', '' ,''],
+    //                   ['', '', '']]
 
-  // Winner = [0,0] [1,0] [2,0]
-  //          [0,1] [1,1] [2,1]
-  //          [0,2] [1,2] [2,2]
+    const [boardArray, setBoardArray] = useState(Array(9).fill(null));
 
-  //          [0,0] [0,1] [0,2]
-  //          [1,0] [1,1] [1,2]
-  //          [2,0] [2,1] [2,2]
+    // boardArray.fill(PLAYER_X_MOVE); //TODO: remove this temp data
+    // boardArray[3] = PLAYER_O_MOVE; //TODO: remove this
 
-  //          [0,0] [1,1] [2,2]
-  //          [0,2] [1,1] [2,0]
+    const [isTurnOfX, setIsTurnOfX] = useState(true);
+    const currentPlayer = isTurnOfX ? PLAYER_X_MOVE : PLAYER_O_MOVE;
 
-  // let boardArray = [['', '', ''],
-  //                   ['', '' ,''],
-  //                   ['', '', '']]
+    const winner = calculateWinner(boardArray);
 
-  let boardArray = Array(9).fill(null);
-  boardArray = [X, X, X, X, X, X, X, X, X];
+    function handlePlayerMove(index) {
+        //if there's a winner, or if the square is already filled, then don't do anything, and just return
+        if (winner || boardArray[index]) return;
 
-  function handlePlayerMove(index) {
-    console.log(`Game->handlePlayerMove: start ${index}`);
-  }
+        // otherwise, (1) update the current board with the player's move
+        setBoardArray([
+            ...boardArray.slice(0, index),
+            currentPlayer,
+            ...boardArray.slice(index + 1),
+        ]);
 
-  // function handlePlayerMove(move, index) {
-  //   console.log(`Game->handlePlayerMove: start ${index}`);
-  //   moveSymbol = move;
-  // }
+        //and (2) toggle players
+        setIsTurnOfX(!isTurnOfX);
+    }
 
-  return (
-    <div className="Game">
-      <Board
-        board={boardArray}
-        handlePlayerMove={handlePlayerMove}
-        moveSymbol={moveSymbol}
-      />
-      <GameInfo />
-    </div>
-  );
+    // function handlePlayerMove(move, index) {
+    //   console.log(`Game->handlePlayerMove: start ${index}`);
+    //   moveSymbol = move;
+    // }
+
+    return (
+        <>
+            <GameInfo
+                gameTitle="Room 56"
+                winner={winner}
+                whosTurn={currentPlayer}
+            />
+            <Board
+                boardArray={boardArray}
+                handlePlayerMove={handlePlayerMove}
+            />
+        </>
+    );
 }
 
 export default Game;

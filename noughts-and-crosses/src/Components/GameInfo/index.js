@@ -9,13 +9,16 @@
 //         - whosTurn (state from Game)
 //     - Render
 //         - "you win {whosTurn}"
-function GameInfo() {
-    //INPUT -{whosTurn}
-    //TODO: replace this placeholder with a real button with an onclick event, and the relevant value showing.
+function GameInfo({gameTitle, winner, whosTurn}) {
     return (
-        <>
-            <p>Player Turn Mary or Player Mary WINS </p>
-        </>
+        <div className="game-info-wrapper">
+            <h1>{gameTitle}</h1>
+            <h3>
+                {winner
+                    ? `🎉 Winner is ${winner}  🎉`
+                    : `Next Player is ${whosTurn}`}
+            </h3>
+        </div>
     );
 }
 export default GameInfo;
