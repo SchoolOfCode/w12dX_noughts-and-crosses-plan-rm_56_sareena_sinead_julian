@@ -1,6 +1,6 @@
-import "./game.css";
-import Board from "../Board";
-import GameInfo from "../GameInfo";
+import './game.css';
+import Board from '../Board';
+import GameInfo from '../GameInfo';
 
 // Game
 //   - State
@@ -20,40 +20,45 @@ import GameInfo from "../GameInfo";
 //     - Winner
 
 function Game() {
-    let moveSymbol = "";
+  let moveSymbol = '';
 
-    // Winner = [0,0] [1,0] [2,0] 
-    //          [0,1] [1,1] [2,1]
-    //          [0,2] [1,2] [2,2]
+  // Winner = [0,0] [1,0] [2,0]
+  //          [0,1] [1,1] [2,1]
+  //          [0,2] [1,2] [2,2]
 
+  //          [0,0] [0,1] [0,2]
+  //          [1,0] [1,1] [1,2]
+  //          [2,0] [2,1] [2,2]
 
-    //          [0,0] [0,1] [0,2] 
-    //          [1,0] [1,1] [1,2] 
-    //          [2,0] [2,1] [2,2] 
+  //          [0,0] [1,1] [2,2]
+  //          [0,2] [1,1] [2,0]
 
-    //          [0,0] [1,1] [2,2] 
-    //          [0,2] [1,1] [2,0] 
+  // let boardArray = [['', '', ''],
+  //                   ['', '' ,''],
+  //                   ['', '', '']]
 
+  let boardArray = Array(9).fill(null);
+  boardArray = [X, X, X, X, X, X, X, X, X];
 
-    let boardArray = [['', '', ''],
-                      ['', '' ,''],
-                      ['', '', '']]
+  function handlePlayerMove(index) {
+    console.log(`Game->handlePlayerMove: start ${index}`);
+  }
 
-    function handlePlayerMove(move, index) {
-        console.log(`Game->handlePlayerMove: start ${index}`);
-        moveSymbol = move;
-    }
+  // function handlePlayerMove(move, index) {
+  //   console.log(`Game->handlePlayerMove: start ${index}`);
+  //   moveSymbol = move;
+  // }
 
-    return (
-        <div className="Game">
-            <Board
-                board={boardArray}
-                handlePlayerMove={handlePlayerMove}
-                moveSymbol={moveSymbol}
-            />
-            <GameInfo />
-        </div>
-    );
+  return (
+    <div className="Game">
+      <Board
+        board={boardArray}
+        handlePlayerMove={handlePlayerMove}
+        moveSymbol={moveSymbol}
+      />
+      <GameInfo />
+    </div>
+  );
 }
 
 export default Game;

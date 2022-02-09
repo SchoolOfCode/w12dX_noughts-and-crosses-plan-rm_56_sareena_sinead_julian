@@ -1,6 +1,6 @@
-import {Col, Row} from "react-bootstrap";
-import "./board.css";
-import Square from "../Square";
+import { Col, Row } from 'react-bootstrap';
+import './board.css';
+import Square from '../Square';
 
 // - Board
 //   - Props
@@ -10,40 +10,56 @@ import Square from "../Square";
 //     - Squares - 1 for each item in board, arranged into a grid
 
 // TODO: Refactor: Hardcoded rows and col and render with map
-function Board({handlePlayerMove, moveSymbol, board}) {
-
-    return (
-        <>
-        {board.map((row, index) => {
-           return  <Row>
-           {row.map((col, i) => {
-               console.log(index, i)
-             return    <Col>
-                <Square
-                    rowIndex={index}
-                    colIndex={i}
-                    handlePlayerMove={handlePlayerMove}
-                    moveSymbol={moveSymbol}
-                />
-            </Col>
-           })}
-
-        </Row>
-
-        })}
-            
-            {/* <Row>
-                <Col></Col>
-                <Col></Col>
-                <Col></Col>
-            </Row>
-            <Row>
-                <Col></Col>
-                <Col></Col>
-                <Col></Col>
-            </Row> */}
-        </>
-    );
+function Board({ handlePlayerMove, board }) {
+  return (
+    <>
+      {board.map((moveSymbol, index) => {
+        return (
+          <Square
+            key={index}
+            handlePlayerMove={() => handlePlayerMove(index)}
+            moveSymbol={moveSymbol}
+          />
+        );
+      })}
+    </>
+  );
 }
+
+// function Board({handlePlayerMove, moveSymbol, board}) {
+
+//   return (
+//       <>
+//       {board.map((row, index) => {
+//          return  <Row>
+//          {row.map((col, i) => {
+//              console.log(index, i)
+//            return    <Col>
+//               <Square
+//                   rowIndex={index}
+//                   colIndex={i}
+//                   handlePlayerMove={handlePlayerMove}
+//                   moveSymbol={moveSymbol}
+//               />
+//           </Col>
+//          })}
+
+//       </Row>
+
+//       })}
+
+//           {/* <Row>
+//               <Col></Col>
+//               <Col></Col>
+//               <Col></Col>
+//           </Row>
+//           <Row>
+//               <Col></Col>
+//               <Col></Col>
+//               <Col></Col>
+//           </Row> */}
+//       </>
+//   );
+// }
 
 export default Board;
