@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Game from './Components/Game';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import Game from "./Components/Game";
+import reportWebVitals from "./reportWebVitals";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Game />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Game />
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your Game, pass a function

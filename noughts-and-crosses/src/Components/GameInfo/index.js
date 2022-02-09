@@ -9,7 +9,12 @@
 //         - whosTurn (state from Game)
 //     - Render
 //         - "you win {whosTurn}"
-import {PLAYER_X_MOVE, PLAYER_O_MOVE, PLAYER_DRAW} from "../../config.js";
+import {
+    PLAYER_X_SYMBOL,
+    PLAYER_O_SYMBOL,
+    PLAYER_DRAW,
+    GAME_ONGOING,
+} from "../../config.js";
 import "./game-info.css";
 
 function GameInfo({
@@ -23,9 +28,12 @@ function GameInfo({
     // ... or winner can be null in which case continue playing (render next player)
     let gameInfoText = "";
     if (winnerOrDraw === PLAYER_DRAW) gameInfoText = ` 😥 It's a draw 😥`;
-    if (winnerOrDraw === PLAYER_O_MOVE || winnerOrDraw === PLAYER_X_MOVE)
+
+    if (winnerOrDraw === PLAYER_X_SYMBOL || winnerOrDraw === PLAYER_O_SYMBOL)
         gameInfoText = `🎉 ${winnerOrDraw} wins! 🎉`;
-    if (winnerOrDraw === null) gameInfoText = `Next Player is ${whosTurn}`;
+
+    if (winnerOrDraw === GAME_ONGOING)
+        gameInfoText = `Next Player is ${whosTurn}`;
 
     return (
         <div className="game-info">

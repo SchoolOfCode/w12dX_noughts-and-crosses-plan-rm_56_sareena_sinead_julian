@@ -20,14 +20,14 @@ import {useState} from "react";
 import {calculateWinner} from "../../helper.js";
 import Board from "../Board";
 import GameInfo from "../GameInfo";
-import {PLAYER_X_MOVE, PLAYER_O_MOVE} from "../../config.js";
+import {PLAYER_X_SYMBOL, PLAYER_O_SYMBOL} from "../../config.js";
 
 function Game() {
     const initialBoardArray = Array(9).fill(null);
     const [boardArray, setBoardArray] = useState(initialBoardArray);
 
     const [isTurnOfX, setIsTurnOfX] = useState(true);
-    const currentPlayer = isTurnOfX ? PLAYER_X_MOVE : PLAYER_O_MOVE;
+    const currentPlayer = isTurnOfX ? PLAYER_X_SYMBOL : PLAYER_O_SYMBOL;
 
     const winner = calculateWinner(boardArray); //null, X or O or DRAW
 
